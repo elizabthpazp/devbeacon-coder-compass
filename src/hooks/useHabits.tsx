@@ -29,13 +29,20 @@ export function useHabits() {
   useEffect(() => {
     if (user) {
       fetchHabits();
-      fetchHabitData();
     } else {
       setHabits([]);
       setHabitData([]);
       setLoading(false);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (habits.length > 0) {
+      fetchHabitData();
+    } else {
+      setLoading(false);
+    }
+  }, [habits]);
 
   const fetchHabits = async () => {
     if (!user) return;
@@ -59,7 +66,7 @@ export function useHabits() {
   };
 
   const fetchHabitData = async () => {
-    if (!user) return;
+    if (!user || habits.length === 0) return;
 
     try {
       const { data, error } = await supabase
@@ -77,6 +84,30 @@ export function useHabits() {
     } catch (error) {
       console.error('Error in fetchHabitData:', error);
       setLoading(false);
+    }
+  };
+
+  const addHabit = async (habitInput: { name: string; icon: string; target: number; unit: string }) => {
+    if (!user) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('habits')
+        .insert({
+          ...habitInput,
+          user_id: user.id
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Error adding habit:', error);
+        return;
+      }
+
+      setHabits(prev => [...prev, data]);
+    } catch (error) {
+      console.error('Error in addHabit:', error);
     }
   };
 
@@ -117,6 +148,7 @@ export function useHabits() {
     habits,
     habitData,
     loading,
+    addHabit,
     updateHabitValue
   };
 }
