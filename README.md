@@ -2,7 +2,7 @@
 
 **El Planner Definitivo para Developers Productivos**
 
-**URL**: https://lovable.dev/projects/f206909e-93d8-405e-9332-e7e6fcc46529
+**URL**: [DevBeacon](https://devbeacon-coder-compass.lovable.app/)
 ---
 
 ## Descripción
@@ -28,9 +28,7 @@ Ideal para quienes quieren estructurar su semana, monitorear su progreso y mante
 
 Actualmente, DevBeacon está disponible en las siguientes versiones:
 
-- **Digital**: descarga en PDF editable, compatible con apps de notas como GoodNotes o Notion.  
-- **Física**: planner impreso para quienes prefieren la versión tradicional.  
-- **Extras**: stickers y recursos descargables para personalizar tu espacio de trabajo.
+- **Digital**: descarga en PDF editable, compatible con apps de notas como GoodNotes o Notion.   
 
 Próximamente podrás encontrarlo en plataformas como Gumroad y Etsy.
 
@@ -46,9 +44,7 @@ Si quieres contribuir con mejoras, ideas o reportar bugs, ¡serás bienvenido! P
 
 Si tienes dudas, sugerencias o quieres saber más, contáctame en:
 
-- Email: tu-email@ejemplo.com  
-- Twitter: [@tuusuario](https://twitter.com/tuusuario)  
-- Instagram: [@tuusuario](https://instagram.com/tuusuario)
+- Email: elizabethpazp695@gmail.com 
 
 ---
 
