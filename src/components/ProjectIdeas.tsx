@@ -1,101 +1,50 @@
+
 import { useState } from 'react';
 import { Lightbulb, Plus, Star, ExternalLink, Calendar } from 'lucide-react';
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  tech_stack: string[];
-  priority: 'low' | 'medium' | 'high';
-  status: 'idea' | 'planning' | 'in_progress' | 'completed';
-  estimated_time: string;
-}
+import { useProjectIdeas } from '@/hooks/useProjectIdeas';
 
 export const ProjectIdeas = () => {
-  const [projects, setProjects] = useState<Project[]>([
-    {
-      id: 1,
-      title: 'Portfolio Personal Interactivo',
-      description: 'Un portfolio que muestre proyectos con animaciones 3D y efectos interactivos',
-      tech_stack: ['React', 'Three.js', 'Framer Motion', 'TypeScript'],
-      priority: 'high',
-      status: 'planning',
-      estimated_time: '2 semanas'
-    },
-    {
-      id: 2,
-      title: 'API de Clima con Cache Redis',
-      description: 'Microservicio que obtiene datos del clima con sistema de cache inteligente',
-      tech_stack: ['Node.js', 'Express', 'Redis', 'PostgreSQL'],
-      priority: 'medium',
-      status: 'idea',
-      estimated_time: '1 semana'
-    },
-    {
-      id: 3,
-      title: 'Mobile App de Hábitos',
-      description: 'App móvil para tracking de hábitos con gamificación y analytics',
-      tech_stack: ['React Native', 'Firebase', 'Redux', 'Chart.js'],
-      priority: 'low',
-      status: 'idea',
-      estimated_time: '1 mes'
-    }
-  ]);
+  const { projects, addProject, updateProjectStatus } = useProjectIdeas();
 
   const [showAddForm, setShowAddForm] = useState(false);
-  const [newProject, setNewProject] = useState<{
-    title: string;
-    description: string;
-    tech_stack: string;
-    priority: Project['priority'];
-    estimated_time: string;
-  }>({
+  const [newProject, setNewProject] = useState({
     title: '',
     description: '',
-    tech_stack: '',
-    priority: 'medium',
-    estimated_time: ''
+    technology_stack: '',
+    priority: 'medium' as const,
+    status: 'idea' as const
   });
 
-  const addProject = () => {
+  const handleAddProject = async () => {
     if (newProject.title && newProject.description) {
-      setProjects([...projects, {
-        id: Date.now(),
-        ...newProject,
-        tech_stack: newProject.tech_stack.split(',').map(tech => tech.trim()),
-        status: 'idea' as const
-      }]);
+      await addProject(newProject);
       setNewProject({
         title: '',
         description: '',
-        tech_stack: '',
+        technology_stack: '',
         priority: 'medium',
-        estimated_time: ''
+        status: 'idea'
       });
       setShowAddForm(false);
     }
   };
 
-  const updateProjectStatus = (id: number, status: Project['status']) => {
-    setProjects(projects.map(project => 
-      project.id === id ? { ...project, status } : project
-    ));
-  };
-
-  const getPriorityColor = (priority: Project['priority']) => {
+  const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'high': return 'text-red-400 bg-red-900';
       case 'medium': return 'text-yellow-400 bg-yellow-900';
       case 'low': return 'text-green-400 bg-green-900';
+      default: return 'text-gray-400 bg-gray-700';
     }
   };
 
-  const getStatusColor = (status: Project['status']) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'idea': return 'text-gray-400 bg-gray-700';
       case 'planning': return 'text-blue-400 bg-blue-900';
       case 'in_progress': return 'text-orange-400 bg-orange-900';
       case 'completed': return 'text-green-400 bg-green-900';
+      default: return 'text-gray-400 bg-gray-700';
     }
   };
 
@@ -134,34 +83,27 @@ export const ProjectIdeas = () => {
               className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-purple-400"
               rows={3}
             />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
                 placeholder="Tech stack (separado por comas)"
-                value={newProject.tech_stack}
-                onChange={(e) => setNewProject({...newProject, tech_stack: e.target.value})}
+                value={newProject.technology_stack}
+                onChange={(e) => setNewProject({...newProject, technology_stack: e.target.value})}
                 className="bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-purple-400"
               />
               <select
                 value={newProject.priority}
-                onChange={(e) => setNewProject({...newProject, priority: e.target.value as Project['priority']})}
+                onChange={(e) => setNewProject({...newProject, priority: e.target.value as any})}
                 className="bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-purple-400"
               >
                 <option value="low">Prioridad Baja</option>
                 <option value="medium">Prioridad Media</option>
                 <option value="high">Prioridad Alta</option>
               </select>
-              <input
-                type="text"
-                placeholder="Tiempo estimado"
-                value={newProject.estimated_time}
-                onChange={(e) => setNewProject({...newProject, estimated_time: e.target.value})}
-                className="bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-purple-400"
-              />
             </div>
             <div className="flex space-x-3">
               <button
-                onClick={addProject}
+                onClick={handleAddProject}
                 className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors"
               >
                 Guardar
@@ -195,25 +137,20 @@ export const ProjectIdeas = () => {
               {project.description}
             </p>
 
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.tech_stack.map((tech, index) => (
-                <span key={index} className="px-2 py-1 bg-blue-600 text-white text-xs rounded">
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <Calendar className="h-4 w-4" />
-                <span>{project.estimated_time}</span>
+            {project.technology_stack && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.technology_stack.split(',').map((tech, index) => (
+                  <span key={index} className="px-2 py-1 bg-blue-600 text-white text-xs rounded">
+                    {tech.trim()}
+                  </span>
+                ))}
               </div>
-            </div>
+            )}
 
             <div className="flex items-center justify-between">
               <select
                 value={project.status}
-                onChange={(e) => updateProjectStatus(project.id, e.target.value as Project['status'])}
+                onChange={(e) => updateProjectStatus(project.id, e.target.value)}
                 className={`px-2 py-1 rounded text-xs border-none ${getStatusColor(project.status)}`}
               >
                 <option value="idea">💡 Idea</option>

@@ -1,107 +1,36 @@
 
 import { useState } from 'react';
-import { BarChart3, Code, BookOpen, Coffee, Target, TrendingUp } from 'lucide-react';
-
-interface HabitData {
-  id: number;
-  name: string;
-  icon: string;
-  target: number;
-  unit: string;
-  dailyData: { [key: string]: number };
-}
+import { BarChart3 } from 'lucide-react';
+import { useHabits } from '@/hooks/useHabits';
 
 export const HabitTracker = () => {
-  const [habits, setHabits] = useState<HabitData[]>([
-    {
-      id: 1,
-      name: 'Horas de Código',
-      icon: '💻',
-      target: 6,
-      unit: 'horas',
-      dailyData: {
-        'Lunes': 8,
-        'Martes': 6,
-        'Miércoles': 4,
-        'Jueves': 0,
-        'Viernes': 0,
-        'Sábado': 0,
-        'Domingo': 0
-      }
-    },
-    {
-      id: 2,
-      name: 'Commits',
-      icon: '📝',
-      target: 5,
-      unit: 'commits',
-      dailyData: {
-        'Lunes': 12,
-        'Martes': 8,
-        'Miércoles': 3,
-        'Jueves': 0,
-        'Viernes': 0,
-        'Sábado': 0,
-        'Domingo': 0
-      }
-    },
-    {
-      id: 3,
-      name: 'Documentación',
-      icon: '📚',
-      target: 30,
-      unit: 'minutos',
-      dailyData: {
-        'Lunes': 45,
-        'Martes': 30,
-        'Miércoles': 15,
-        'Jueves': 0,
-        'Viernes': 0,
-        'Sábado': 0,
-        'Domingo': 0
-      }
-    },
-    {
-      id: 4,
-      name: 'Bugs Resueltos',
-      icon: '🐛',
-      target: 3,
-      unit: 'bugs',
-      dailyData: {
-        'Lunes': 5,
-        'Martes': 2,
-        'Miércoles': 1,
-        'Jueves': 0,
-        'Viernes': 0,
-        'Sábado': 0,
-        'Domingo': 0
-      }
-    }
-  ]);
-
-  const [selectedHabit, setSelectedHabit] = useState<number>(1);
+  const { habits, habitData, updateHabitValue } = useHabits();
+  const [selectedHabit, setSelectedHabit] = useState<string | null>(null);
 
   const weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
-  const updateHabitValue = (habitId: number, day: string, value: number) => {
-    setHabits(habits.map(habit => 
-      habit.id === habitId 
-        ? { ...habit, dailyData: { ...habit.dailyData, [day]: value } }
-        : habit
-    ));
+  const getHabitValue = (habitId: string, dayName: string) => {
+    const data = habitData.find(hd => hd.habit_id === habitId && hd.day_name === dayName);
+    return data?.value || 0;
   };
 
-  const getProgress = (habit: HabitData) => {
-    const total = Object.values(habit.dailyData).reduce((sum, val) => sum + val, 0);
-    const target = habit.target * 7; // Weekly target
+  const getProgress = (habitId: string) => {
+    const habit = habits.find(h => h.id === habitId);
+    if (!habit) return 0;
+
+    const total = weekDays.reduce((sum, day) => sum + getHabitValue(habitId, day), 0);
+    const target = habit.target * 7;
     return Math.min((total / target) * 100, 100);
   };
 
-  const getStreakCount = (habit: HabitData) => {
+  const getStreakCount = (habitId: string) => {
+    const habit = habits.find(h => h.id === habitId);
+    if (!habit) return 0;
+
     let streak = 0;
     for (let i = weekDays.length - 1; i >= 0; i--) {
       const day = weekDays[i];
-      if (habit.dailyData[day] >= habit.target) {
+      if (getHabitValue(habitId, day) >= habit.target) {
         streak++;
       } else {
         break;
@@ -109,6 +38,8 @@ export const HabitTracker = () => {
     }
     return streak;
   };
+
+  const selectedHabitData = habits.find(h => h.id === selectedHabit);
 
   return (
     <div className="space-y-6">
@@ -139,7 +70,7 @@ export const HabitTracker = () => {
               <div className="text-right">
                 <div className="text-sm text-gray-400">Streak</div>
                 <div className="text-lg font-bold text-orange-400">
-                  {getStreakCount(habit)} días
+                  {getStreakCount(habit.id)} días
                 </div>
               </div>
             </div>
@@ -147,38 +78,35 @@ export const HabitTracker = () => {
             <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
               <div 
                 className="bg-gradient-to-r from-purple-400 to-blue-500 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${getProgress(habit)}%` }}
+                style={{ width: `${getProgress(habit.id)}%` }}
               ></div>
             </div>
             <div className="text-xs text-gray-400">
-              {getProgress(habit).toFixed(0)}% completado esta semana
+              {getProgress(habit.id).toFixed(0)}% completado esta semana
             </div>
           </div>
         ))}
       </div>
 
       {/* Detailed View */}
-      {selectedHabit && (
+      {selectedHabitData && (
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
           <div className="flex items-center space-x-3 mb-6">
-            <span className="text-3xl">
-              {habits.find(h => h.id === selectedHabit)?.icon}
-            </span>
+            <span className="text-3xl">{selectedHabitData.icon}</span>
             <div>
               <h3 className="text-xl font-semibold text-white">
-                {habits.find(h => h.id === selectedHabit)?.name}
+                {selectedHabitData.name}
               </h3>
               <p className="text-gray-400">
-                Meta diaria: {habits.find(h => h.id === selectedHabit)?.target} {habits.find(h => h.id === selectedHabit)?.unit}
+                Meta diaria: {selectedHabitData.target} {selectedHabitData.unit}
               </p>
             </div>
           </div>
 
           <div className="grid grid-cols-7 gap-3">
             {weekDays.map((day) => {
-              const habit = habits.find(h => h.id === selectedHabit)!;
-              const value = habit.dailyData[day];
-              const achieved = value >= habit.target;
+              const value = getHabitValue(selectedHabitData.id, day);
+              const achieved = value >= selectedHabitData.target;
               
               return (
                 <div key={day} className="text-center">
@@ -193,7 +121,7 @@ export const HabitTracker = () => {
                     <input
                       type="number"
                       value={value}
-                      onChange={(e) => updateHabitValue(selectedHabit, day, Number(e.target.value))}
+                      onChange={(e) => updateHabitValue(selectedHabitData.id, day, Number(e.target.value))}
                       className="w-full h-full bg-transparent text-center text-white text-sm focus:outline-none"
                       min="0"
                     />
@@ -210,22 +138,19 @@ export const HabitTracker = () => {
           <div className="mt-6 grid grid-cols-3 gap-4">
             <div className="text-center p-3 bg-gray-700 rounded">
               <div className="text-2xl font-bold text-blue-400">
-                {Object.values(habits.find(h => h.id === selectedHabit)!.dailyData).reduce((sum, val) => sum + val, 0)}
+                {weekDays.reduce((sum, day) => sum + getHabitValue(selectedHabitData.id, day), 0)}
               </div>
               <div className="text-sm text-gray-400">Total Semanal</div>
             </div>
             <div className="text-center p-3 bg-gray-700 rounded">
               <div className="text-2xl font-bold text-green-400">
-                {weekDays.filter(day => 
-                  habits.find(h => h.id === selectedHabit)!.dailyData[day] >= 
-                  habits.find(h => h.id === selectedHabit)!.target
-                ).length}
+                {weekDays.filter(day => getHabitValue(selectedHabitData.id, day) >= selectedHabitData.target).length}
               </div>
               <div className="text-sm text-gray-400">Días Completados</div>
             </div>
             <div className="text-center p-3 bg-gray-700 rounded">
               <div className="text-2xl font-bold text-purple-400">
-                {getProgress(habits.find(h => h.id === selectedHabit)!).toFixed(0)}%
+                {getProgress(selectedHabitData.id).toFixed(0)}%
               </div>
               <div className="text-sm text-gray-400">Progreso</div>
             </div>

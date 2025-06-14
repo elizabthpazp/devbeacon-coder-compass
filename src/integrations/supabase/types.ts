@@ -9,7 +9,233 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      code_snippets: {
+        Row: {
+          code: string
+          created_at: string
+          description: string | null
+          id: string
+          language: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          language: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          language?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      habit_daily_data: {
+        Row: {
+          created_at: string
+          day_name: string
+          habit_id: string
+          id: string
+          updated_at: string
+          value: number | null
+          week_start_date: string
+        }
+        Insert: {
+          created_at?: string
+          day_name: string
+          habit_id: string
+          id?: string
+          updated_at?: string
+          value?: number | null
+          week_start_date?: string
+        }
+        Update: {
+          created_at?: string
+          day_name?: string
+          habit_id?: string
+          id?: string
+          updated_at?: string
+          value?: number | null
+          week_start_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "habit_daily_data_habit_id_fkey"
+            columns: ["habit_id"]
+            isOneToOne: false
+            referencedRelation: "habits"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      habits: {
+        Row: {
+          created_at: string
+          icon: string
+          id: string
+          name: string
+          target: number
+          unit: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          icon: string
+          id?: string
+          name: string
+          target: number
+          unit: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string
+          id?: string
+          name?: string
+          target?: number
+          unit?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      pomodoros: {
+        Row: {
+          count: number | null
+          created_at: string
+          day_name: string
+          id: string
+          updated_at: string
+          user_id: string
+          week_start_date: string
+        }
+        Insert: {
+          count?: number | null
+          created_at?: string
+          day_name: string
+          id?: string
+          updated_at?: string
+          user_id: string
+          week_start_date?: string
+        }
+        Update: {
+          count?: number | null
+          created_at?: string
+          day_name?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+          week_start_date?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          current_stack: string | null
+          energy_level: number | null
+          id: string
+          updated_at: string
+          weekly_goal: string | null
+        }
+        Insert: {
+          created_at?: string
+          current_stack?: string | null
+          energy_level?: number | null
+          id: string
+          updated_at?: string
+          weekly_goal?: string | null
+        }
+        Update: {
+          created_at?: string
+          current_stack?: string | null
+          energy_level?: number | null
+          id?: string
+          updated_at?: string
+          weekly_goal?: string | null
+        }
+        Relationships: []
+      }
+      project_ideas: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          priority: string | null
+          status: string | null
+          technology_stack: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          technology_stack?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          technology_stack?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          completed: boolean | null
+          created_at: string
+          day: string
+          id: string
+          text: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean | null
+          created_at?: string
+          day: string
+          id?: string
+          text: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean | null
+          created_at?: string
+          day?: string
+          id?: string
+          text?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -1,17 +1,13 @@
+
 import { useState } from 'react';
 import { CheckSquare, Square, Clock, Target, Zap, Plus } from 'lucide-react';
+import { useProfile } from '@/hooks/useProfile';
+import { useTasks } from '@/hooks/useTasks';
 
 export const WeeklyView = () => {
-  const [weeklyGoal, setWeeklyGoal] = useState('Completar feature de autenticación');
-  const [currentStack, setCurrentStack] = useState('React + TypeScript');
-  const [tasks, setTasks] = useState([
-    { id: 1, text: 'Implementar login con GitHub', completed: true, day: 'Lunes' },
-    { id: 2, text: 'Crear componente de dashboard', completed: false, day: 'Martes' },
-    { id: 3, text: 'Integrar API de usuario', completed: false, day: 'Miércoles' },
-    { id: 4, text: 'Testing unitario', completed: false, day: 'Jueves' },
-    { id: 5, text: 'Deployment a producción', completed: false, day: 'Viernes' },
-  ]);
-
+  const { profile, updateProfile } = useProfile();
+  const { tasks, addTask, toggleTask } = useTasks();
+  
   const [showAddTask, setShowAddTask] = useState(false);
   const [newTask, setNewTask] = useState({ text: '', day: 'Lunes' });
 
@@ -25,28 +21,23 @@ export const WeeklyView = () => {
     Domingo: 0,
   });
 
-  const [energy, setEnergy] = useState(85);
-
-  const toggleTask = (id: number) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
-  };
-
-  const addTask = () => {
+  const handleAddTask = async () => {
     if (newTask.text.trim()) {
-      setTasks([...tasks, {
-        id: Date.now(),
-        text: newTask.text,
-        completed: false,
-        day: newTask.day
-      }]);
+      await addTask(newTask.text, newTask.day);
       setNewTask({ text: '', day: 'Lunes' });
       setShowAddTask(false);
     }
   };
 
   const weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
+  if (!profile) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -62,8 +53,8 @@ export const WeeklyView = () => {
             <label className="block text-sm text-gray-400 mb-2">Objetivo Semanal</label>
             <input
               type="text"
-              value={weeklyGoal}
-              onChange={(e) => setWeeklyGoal(e.target.value)}
+              value={profile.weekly_goal || ''}
+              onChange={(e) => updateProfile({ weekly_goal: e.target.value })}
               className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-400"
             />
           </div>
@@ -71,8 +62,8 @@ export const WeeklyView = () => {
             <label className="block text-sm text-gray-400 mb-2">Stack/Tecnología</label>
             <input
               type="text"
-              value={currentStack}
-              onChange={(e) => setCurrentStack(e.target.value)}
+              value={profile.current_stack || ''}
+              onChange={(e) => updateProfile({ current_stack: e.target.value })}
               className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-400"
             />
           </div>
@@ -82,20 +73,20 @@ export const WeeklyView = () => {
         <div className="mt-4">
           <label className="block text-sm text-gray-400 mb-2 flex items-center">
             <Zap className="mr-2 h-4 w-4" />
-            Nivel de Energía: {energy}%
+            Nivel de Energía: {profile.energy_level}%
           </label>
           <div className="w-full bg-gray-700 rounded-full h-2">
             <div 
               className="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${energy}%` }}
+              style={{ width: `${profile.energy_level}%` }}
             ></div>
           </div>
           <input
             type="range"
             min="0"
             max="100"
-            value={energy}
-            onChange={(e) => setEnergy(Number(e.target.value))}
+            value={profile.energy_level}
+            onChange={(e) => updateProfile({ energy_level: Number(e.target.value) })}
             className="w-full mt-2"
           />
         </div>
@@ -142,7 +133,7 @@ export const WeeklyView = () => {
                 </select>
                 <div className="flex space-x-2">
                   <button
-                    onClick={addTask}
+                    onClick={handleAddTask}
                     className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors"
                   >
                     Guardar

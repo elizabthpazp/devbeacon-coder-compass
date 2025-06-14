@@ -1,65 +1,10 @@
 
 import { useState } from 'react';
 import { Code, Copy, Plus, Trash2 } from 'lucide-react';
-
-interface Snippet {
-  id: number;
-  title: string;
-  language: string;
-  code: string;
-  description: string;
-}
+import { useSnippets } from '@/hooks/useSnippets';
 
 export const SnippetManager = () => {
-  const [snippets, setSnippets] = useState<Snippet[]>([
-    {
-      id: 1,
-      title: 'React useLocalStorage Hook',
-      language: 'typescript',
-      code: `const useLocalStorage = <T>(key: string, initialValue: T) => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      return initialValue;
-    }
-  });
-
-  const setValue = (value: T | ((val: T) => T)) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  return [storedValue, setValue] as const;
-};`,
-      description: 'Hook personalizado para manejar localStorage en React'
-    },
-    {
-      id: 2,
-      title: 'Python API Response Handler',
-      language: 'python',
-      code: `def handle_api_response(response):
-    """
-    Maneja respuestas de API con manejo de errores
-    """
-    try:
-        if response.status_code == 200:
-            return {"success": True, "data": response.json()}
-        elif response.status_code == 404:
-            return {"success": False, "error": "Resource not found"}
-        else:
-            return {"success": False, "error": f"HTTP {response.status_code}"}
-    except Exception as e:
-        return {"success": False, "error": str(e)}`,
-      description: 'Función para manejar respuestas de API con manejo de errores'
-    }
-  ]);
+  const { snippets, addSnippet, deleteSnippet } = useSnippets();
 
   const [newSnippet, setNewSnippet] = useState({
     title: '',
@@ -70,24 +15,16 @@ export const SnippetManager = () => {
 
   const [showAddForm, setShowAddForm] = useState(false);
 
-  const addSnippet = () => {
+  const handleAddSnippet = async () => {
     if (newSnippet.title && newSnippet.code) {
-      setSnippets([...snippets, {
-        id: Date.now(),
-        ...newSnippet
-      }]);
+      await addSnippet(newSnippet);
       setNewSnippet({ title: '', language: 'javascript', code: '', description: '' });
       setShowAddForm(false);
     }
   };
 
-  const deleteSnippet = (id: number) => {
-    setSnippets(snippets.filter(snippet => snippet.id !== id));
-  };
-
   const copyToClipboard = (code: string) => {
     navigator.clipboard.writeText(code);
-    // Here you could add a toast notification
   };
 
   return (
@@ -148,7 +85,7 @@ export const SnippetManager = () => {
             />
             <div className="flex space-x-3">
               <button
-                onClick={addSnippet}
+                onClick={handleAddSnippet}
                 className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors"
               >
                 Guardar
