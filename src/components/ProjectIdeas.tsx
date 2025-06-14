@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Lightbulb, Plus, Star, ExternalLink, Calendar } from 'lucide-react';
 
@@ -44,11 +43,17 @@ export const ProjectIdeas = () => {
   ]);
 
   const [showAddForm, setShowAddForm] = useState(false);
-  const [newProject, setNewProject] = useState({
+  const [newProject, setNewProject] = useState<{
+    title: string;
+    description: string;
+    tech_stack: string;
+    priority: Project['priority'];
+    estimated_time: string;
+  }>({
     title: '',
     description: '',
     tech_stack: '',
-    priority: 'medium' as const,
+    priority: 'medium',
     estimated_time: ''
   });
 
