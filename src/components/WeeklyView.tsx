@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { CheckSquare, Square, Clock, Target, Zap } from 'lucide-react';
+import { CheckSquare, Square, Clock, Target, Zap, Plus } from 'lucide-react';
 
 export const WeeklyView = () => {
   const [weeklyGoal, setWeeklyGoal] = useState('Completar feature de autenticación');
@@ -12,6 +11,9 @@ export const WeeklyView = () => {
     { id: 4, text: 'Testing unitario', completed: false, day: 'Jueves' },
     { id: 5, text: 'Deployment a producción', completed: false, day: 'Viernes' },
   ]);
+
+  const [showAddTask, setShowAddTask] = useState(false);
+  const [newTask, setNewTask] = useState({ text: '', day: 'Lunes' });
 
   const [pomodoros, setPomodoros] = useState({
     Lunes: 6,
@@ -29,6 +31,19 @@ export const WeeklyView = () => {
     setTasks(tasks.map(task => 
       task.id === id ? { ...task, completed: !task.completed } : task
     ));
+  };
+
+  const addTask = () => {
+    if (newTask.text.trim()) {
+      setTasks([...tasks, {
+        id: Date.now(),
+        text: newTask.text,
+        completed: false,
+        day: newTask.day
+      }]);
+      setNewTask({ text: '', day: 'Lunes' });
+      setShowAddTask(false);
+    }
   };
 
   const weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -90,10 +105,59 @@ export const WeeklyView = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Tasks */}
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-            <CheckSquare className="mr-2 h-5 w-5 text-green-400" />
-            Tareas de la Semana
-          </h3>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold text-white flex items-center">
+              <CheckSquare className="mr-2 h-5 w-5 text-green-400" />
+              Tareas de la Semana
+            </h3>
+            <button
+              onClick={() => setShowAddTask(true)}
+              className="flex items-center space-x-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors"
+            >
+              <Plus className="h-4 w-4" />
+              <span>Agregar</span>
+            </button>
+          </div>
+
+          {/* Add Task Form */}
+          {showAddTask && (
+            <div className="mb-4 p-3 bg-gray-700 rounded border border-gray-600">
+              <input
+                type="text"
+                placeholder="Nueva tarea..."
+                value={newTask.text}
+                onChange={(e) => setNewTask({...newTask, text: e.target.value})}
+                className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-green-400 mb-3"
+                autoFocus
+              />
+              <div className="flex justify-between items-center">
+                <select
+                  value={newTask.day}
+                  onChange={(e) => setNewTask({...newTask, day: e.target.value})}
+                  className="bg-gray-600 border border-gray-500 rounded px-2 py-1 text-white text-sm focus:outline-none focus:border-green-400"
+                >
+                  {weekDays.map(day => (
+                    <option key={day} value={day}>{day}</option>
+                  ))}
+                </select>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={addTask}
+                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors"
+                  >
+                    Guardar
+                  </button>
+                  <button
+                    onClick={() => setShowAddTask(false)}
+                    className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-sm transition-colors"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="space-y-3">
             {tasks.map((task) => (
               <div key={task.id} className="flex items-center space-x-3 p-3 bg-gray-700 rounded border border-gray-600">
