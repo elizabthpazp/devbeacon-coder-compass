@@ -1,73 +1,62 @@
-# Welcome to your Lovable project
+# DevBeacon
 
-## Project info
+**El Planner Definitivo para Developers Productivos**
 
 **URL**: https://lovable.dev/projects/f206909e-93d8-405e-9332-e7e6fcc46529
+---
 
-## How can I edit this code?
+## Descripción
 
-There are several ways of editing your application.
+DevBeacon es un planner especialmente diseñado para desarrolladores de software que buscan maximizar su productividad y organización. Combina gestión de tareas, seguimiento de hábitos tecnológicos y espacios específicos para coders, como snippets, bugs y logros diarios.
 
-**Use Lovable**
+Ideal para quienes quieren estructurar su semana, monitorear su progreso y mantener la motivación alta, todo con un diseño inspirado en IDEs y pensado para cuidar la vista.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f206909e-93d8-405e-9332-e7e6fcc46529) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Características principales
 
-**Use your preferred IDE**
+- Vista semanal con tareas diarias, conteo de pomodoros y mood tracker
+- Trackers mensuales de horas de código, commits, bugs y aprendizajes
+- Secciones para snippets, ideas de side projects, cursos y roadmap personal
+- Diseño oscuro y tipografía monoespaciada, inspirado en editores de código
+- Versiones digitales (PDF, Notion, GoodNotes) y versión física impresa
+- Pack descargable adicional: stickers, wallpapers y plantillas para IDE
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Cómo usar
 
-Follow these steps:
+Actualmente, DevBeacon está disponible en las siguientes versiones:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Digital**: descarga en PDF editable, compatible con apps de notas como GoodNotes o Notion.  
+- **Física**: planner impreso para quienes prefieren la versión tradicional.  
+- **Extras**: stickers y recursos descargables para personalizar tu espacio de trabajo.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Próximamente podrás encontrarlo en plataformas como Gumroad y Etsy.
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## Contribuciones
 
-**Edit a file directly in GitHub**
+Si quieres contribuir con mejoras, ideas o reportar bugs, ¡serás bienvenido! Por favor, abre un issue o envía un pull request con tus sugerencias.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## Contacto
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Si tienes dudas, sugerencias o quieres saber más, contáctame en:
 
-## What technologies are used for this project?
+- Email: tu-email@ejemplo.com  
+- Twitter: [@tuusuario](https://twitter.com/tuusuario)  
+- Instagram: [@tuusuario](https://instagram.com/tuusuario)
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Licencia
 
-## How can I deploy this project?
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
 
-Simply open [Lovable](https://lovable.dev/projects/f206909e-93d8-405e-9332-e7e6fcc46529) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+¡Gracias por interesarte en DevBeacon! Que tu código y tu productividad siempre brillen. 🚀✨
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
