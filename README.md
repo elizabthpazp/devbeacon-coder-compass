@@ -1,58 +1,58 @@
-# DevBeacon
+# DevBeacon 🚀
 
-**El Planner Definitivo para Developers Productivos**
+**The Ultimate Planner for Productive Developers** 💻✨
 
 **URL**: [DevBeacon](https://devbeacon-coder-compass.lovable.app/)
----
-
-## Descripción
-
-DevBeacon es un planner especialmente diseñado para desarrolladores de software que buscan maximizar su productividad y organización. Combina gestión de tareas, seguimiento de hábitos tecnológicos y espacios específicos para coders, como snippets, bugs y logros diarios.
-
-Ideal para quienes quieren estructurar su semana, monitorear su progreso y mantener la motivación alta, todo con un diseño inspirado en IDEs y pensado para cuidar la vista.
 
 ---
 
-## Características principales
+## Description 📔
 
-- Vista semanal con tareas diarias, conteo de pomodoros y mood tracker
-- Trackers mensuales de horas de código, commits, bugs y aprendizajes
-- Secciones para snippets, ideas de side projects, cursos y roadmap personal
-- Diseño oscuro y tipografía monoespaciada, inspirado en editores de código
-- Versiones digitales (PDF, Notion, GoodNotes) y versión física impresa
-- Pack descargable adicional: stickers, wallpapers y plantillas para IDE
+DevBeacon is a planner specially designed for software developers who want to maximize their productivity and organization. It combines task management, tech habit tracking, and dedicated spaces for coders—like snippets, bugs, and daily achievements.
+
+Perfect for those who want to structure their week, monitor their progress, and stay highly motivated, all wrapped in a design inspired by IDEs and optimized for eye comfort. 🌙🖥️
 
 ---
 
-## Cómo usar
+## Key Features 🎯
 
-Actualmente, DevBeacon está disponible en las siguientes versiones:
-
-- **Digital**: descarga en PDF editable, compatible con apps de notas como GoodNotes o Notion.   
-
-Próximamente podrás encontrarlo en plataformas como Gumroad y Etsy.
-
----
-
-## Contribuciones
-
-Si quieres contribuir con mejoras, ideas o reportar bugs, ¡serás bienvenido! Por favor, abre un issue o envía un pull request con tus sugerencias.
+- Weekly view with daily tasks, pomodoro counters, and mood tracker 😊🔥  
+- Monthly trackers for coding hours, commits, bugs, and learnings 📈🐞  
+- Sections for snippets, side project ideas, courses, and personal roadmap 💡📚  
+- Dark mode design and monospace font, inspired by code editors 🌓⌨️  
+- Available as digital versions (PDF, Notion, GoodNotes) and printed physical planner 📝📦  
+- Bonus downloadable pack: stickers, wallpapers, and IDE templates 🎨🖼️
 
 ---
 
-## Contacto
+## How to Use 🛠️
 
-Si tienes dudas, sugerencias o quieres saber más, contáctame en:
+DevBeacon is currently available in these versions:
 
-- Email: elizabethpazp695@gmail.com 
+- **Digital**: Editable PDF download, compatible with note-taking apps like GoodNotes or Notion.  
 
----
-
-## Licencia
-
-Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+Coming soon to platforms like Gumroad and Etsy! 🛒
 
 ---
 
-¡Gracias por interesarte en DevBeacon! Que tu código y tu productividad siempre brillen. 🚀✨
+## Contributions 🤝
 
+Want to contribute improvements, ideas, or report bugs? You’re very welcome! Please open an issue or send a pull request with your suggestions.
+
+---
+
+## Contact ✉️
+
+Questions, suggestions, or want to know more? Reach out at:
+
+- Email: elizabethpazp695@gmail.com
+
+---
+
+## License 📄
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+Thanks for checking out DevBeacon! May your code and productivity always shine bright. 💜🚀✨
