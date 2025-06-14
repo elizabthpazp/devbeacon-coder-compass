@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { CheckSquare, Square, Clock, Target, Zap, Plus, Minus } from 'lucide-react';
+import { CheckSquare, Square, Clock, Target, Zap, Plus } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useTasks } from '@/hooks/useTasks';
 import { usePomodoros } from '@/hooks/usePomodoros';
@@ -8,7 +8,7 @@ import { usePomodoros } from '@/hooks/usePomodoros';
 export const WeeklyView = () => {
   const { profile, updateProfile } = useProfile();
   const { tasks, addTask, toggleTask } = useTasks();
-  const { getPomodoroCount, updatePomodoroCount, loading: pomodorosLoading } = usePomodoros();
+  const { getPomodoroCount, loading: pomodorosLoading } = usePomodoros();
   
   const [showAddTask, setShowAddTask] = useState(false);
   const [newTask, setNewTask] = useState({ text: '', day: 'Lunes' });
@@ -19,12 +19,6 @@ export const WeeklyView = () => {
       setNewTask({ text: '', day: 'Lunes' });
       setShowAddTask(false);
     }
-  };
-
-  const handlePomodoroChange = (day: string, increment: boolean) => {
-    const currentCount = getPomodoroCount(day);
-    const newCount = increment ? currentCount + 1 : Math.max(0, currentCount - 1);
-    updatePomodoroCount(day, newCount);
   };
 
   const weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -173,6 +167,9 @@ export const WeeklyView = () => {
             <Clock className="mr-2 h-5 w-5 text-red-400" />
             Pomodoros Completados
           </h3>
+          <p className="text-sm text-gray-400 mb-4">
+            Los pomodoros se incrementan automáticamente al completar tareas
+          </p>
           {pomodorosLoading ? (
             <div className="flex items-center justify-center py-8">
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-400"></div>
@@ -185,19 +182,7 @@ export const WeeklyView = () => {
                   <div key={day} className="flex items-center justify-between p-3 bg-gray-700 rounded border border-gray-600">
                     <span className="text-white font-medium">{day}</span>
                     <div className="flex items-center space-x-3">
-                      <button
-                        onClick={() => handlePomodoroChange(day, false)}
-                        className="w-6 h-6 bg-gray-600 hover:bg-gray-500 rounded flex items-center justify-center text-white transition-colors"
-                      >
-                        <Minus className="h-3 w-3" />
-                      </button>
                       <span className="text-blue-400 font-mono min-w-[20px] text-center">{count}</span>
-                      <button
-                        onClick={() => handlePomodoroChange(day, true)}
-                        className="w-6 h-6 bg-red-600 hover:bg-red-700 rounded flex items-center justify-center text-white transition-colors"
-                      >
-                        <Plus className="h-3 w-3" />
-                      </button>
                       <div className="flex space-x-1">
                         {[...Array(Math.min(count, 8))].map((_, i) => (
                           <div key={i} className="w-3 h-3 bg-red-400 rounded-full"></div>

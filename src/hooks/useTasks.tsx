@@ -74,6 +74,38 @@ export function useTasks() {
     }
   };
 
+  const updatePomodoroCount = async (dayName: string) => {
+    if (!user) return;
+
+    try {
+      // Get current pomodoro count for the day
+      const { data: currentData, error: fetchError } = await supabase
+        .from('pomodoros')
+        .select('count')
+        .eq('user_id', user.id)
+        .eq('day_name', dayName)
+        .single();
+
+      const currentCount = currentData?.count || 0;
+
+      // Increment the count
+      const { error } = await supabase
+        .from('pomodoros')
+        .upsert({
+          user_id: user.id,
+          day_name: dayName,
+          count: currentCount + 1,
+          week_start_date: new Date().toISOString().split('T')[0]
+        });
+
+      if (error) {
+        console.error('Error updating pomodoro count:', error);
+      }
+    } catch (error) {
+      console.error('Error in updatePomodoroCount:', error);
+    }
+  };
+
   const toggleTask = async (id: string) => {
     const task = tasks.find(t => t.id === id);
     if (!task) return;
@@ -89,6 +121,11 @@ export function useTasks() {
       if (error) {
         console.error('Error toggling task:', error);
         return;
+      }
+
+      // If task is being marked as completed, increment pomodoro count
+      if (!task.completed && data.completed) {
+        await updatePomodoroCount(task.day);
       }
 
       setTasks(prev => prev.map(t => t.id === id ? data : t));

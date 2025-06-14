@@ -19,6 +19,27 @@ export function usePomodoros() {
   useEffect(() => {
     if (user) {
       fetchPomodoros();
+      
+      // Set up real-time subscription to pomodoros table
+      const channel = supabase
+        .channel('pomodoros-changes')
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'pomodoros',
+            filter: `user_id=eq.${user.id}`
+          },
+          () => {
+            fetchPomodoros();
+          }
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
     } else {
       setPomodoros([]);
       setLoading(false);
