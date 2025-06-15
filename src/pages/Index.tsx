@@ -8,7 +8,6 @@ import { HabitTracker } from '@/components/HabitTracker';
 import { Navigation } from '@/components/Navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { Analytics } from "@vercel/analytics/next"
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('weekly');
@@ -56,8 +55,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-green-400 font-mono">
       {/* Header */}
-      <header className="border-b border-gray-700 bg-gray-800 px-4 md:px-6 py-4">
-        <Analytics/>
+      <header className="border-b border-gray-700 bg-gray-800 px-4 md:px-6 py-4">  
         <div className="flex items-center justify-between ml-12 md:ml-0">
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
