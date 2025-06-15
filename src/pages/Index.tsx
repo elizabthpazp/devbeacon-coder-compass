@@ -99,7 +99,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-gray-700 bg-gray-800 px-4 md:px-6 py-4 text-center text-xs md:text-sm text-gray-400">
-        <p>DevBeacon © 2024 | Designed by and for developers 💜</p>
+        <p>DevBeacon © 2025 | Designed by and for developers 💜</p>
       </footer>
     </div>
   );

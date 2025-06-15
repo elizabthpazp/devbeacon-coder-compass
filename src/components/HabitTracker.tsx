@@ -58,7 +58,7 @@ export const HabitTracker = () => {
           Habit Tracker
         </h2>
         <div className="text-sm text-gray-400">
-          Week of June 11-17, 2024
+          Week of June 11-17, 2025
         </div>
       </div>
 
