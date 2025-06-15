@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Code, LogOut } from 'lucide-react';
+import { Code, LogOut, Github } from 'lucide-react';
 import { WeeklyView } from '@/components/WeeklyView';
 import { SnippetManager } from '@/components/SnippetManager';
 import { ProjectIdeas } from '@/components/ProjectIdeas';
@@ -101,8 +100,21 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-gray-700 bg-gray-800 px-4 md:px-6 py-4 text-center text-xs md:text-sm text-gray-400">
-        <p>DevBeacon © 2025 | By <span><a className='text-purple-200 font-bold hover:text-purple-500' href="https://elijs.dev" target="_blank">elijs.dev</a></span> for developers 💜</p>
+        <p>DevBeacon © 2025 | Designed by and for developers 💜</p>
       </footer>
+
+      {/* GitHub Link */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <a
+          href="https://github.com/elijs-dev/devbeacon"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white px-3 py-2 rounded-lg shadow-lg transition-all duration-200 border border-gray-600 hover:border-gray-500"
+        >
+          <Github className="h-4 w-4" />
+          <span className="text-sm font-medium">View on GitHub</span>
+        </a>
+      </div>
     </div>
   );
 };
