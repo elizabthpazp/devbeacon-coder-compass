@@ -2,7 +2,7 @@
 
 **The Ultimate Planner for Productive Developers** 💻✨
 
-**URL**: [DevBeacon](https://devbeacon-coder-compass.lovable.app/)
+**URL**: [DevBeacon](https://devbeacon.elijs.dev)
 
 ---
 
