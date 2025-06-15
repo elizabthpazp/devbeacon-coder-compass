@@ -56,7 +56,8 @@ const Index = () => {
     <div className="min-h-screen bg-gray-900 text-green-400 font-mono">
       {/* Header */}
       <header className="border-b border-gray-700 bg-gray-800 px-4 md:px-6 py-4">  
-        <div className="flex items-center justify-between ml-12 md:ml-0">
+        <div className="flex flex-col md:flex-row md:items-center justify-between ml-12 md:ml-0 space-y-2 md:space-y-0">
+          {/* Logo y descripción */}
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
               <Code className="h-6 md:h-8 w-6 md:w-8 text-blue-400" />
@@ -67,16 +68,17 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-400">
+          {/* Usuario y botón de salir - En mobile van abajo */}
+          <div className="flex flex-col md:flex-row md:items-center space-y-1 md:space-y-0 md:space-x-4">
+            <span className="text-sm text-gray-400 truncate">
               {user.email}
             </span>
             <button
               onClick={handleSignOut}
-              className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
+              className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors self-start md:self-auto"
             >
               <LogOut className="h-4 w-4" />
-              <span className="hidden sm:inline">Sign Out</span>
+              <span className="sm:inline">Sign Out</span>
             </button>
           </div>
         </div>
