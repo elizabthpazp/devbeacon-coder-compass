@@ -56,7 +56,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-900 text-green-400 font-mono">
       {/* Header */}
       <header className="border-b border-gray-700 bg-gray-800 px-4 md:px-6 py-4">  
-        <div className="flex flex-col md:flex-row md:items-center justify-between ml-12 md:ml-0 space-y-2 md:space-y-0">
+        <div className="flex flex-col md:flex-row md:items-center justify-between ml-16 md:ml-0 space-y-2 md:space-y-0">
           {/* Logo y descripción */}
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
@@ -101,7 +101,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-gray-700 bg-gray-800 px-4 md:px-6 py-4 text-center text-xs md:text-sm text-gray-400">
-        <p>DevBeacon © 2025 | Designed by and for developers 💜</p>
+        <p>DevBeacon © 2025 | By <span><a className='text-purple-200 font-bold hover:text-purple-500' href="https://elijs.dev" target="_blank">elijs.dev</a></span> for developers 💜</p>
       </footer>
     </div>
   );
