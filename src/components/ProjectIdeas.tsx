@@ -60,24 +60,24 @@ export const ProjectIdeas = () => {
           className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors"
         >
           <Plus className="h-4 w-4" />
-          <span>Nueva Idea</span>
+          <span>New Idea</span>
         </button>
       </div>
 
       {/* Add Project Form */}
       {showAddForm && (
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h3 className="text-lg font-semibold text-white mb-4">Agregar Nueva Idea de Proyecto</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">Add New Project Idea</h3>
           <div className="space-y-4">
             <input
               type="text"
-              placeholder="Título del proyecto"
+              placeholder="Project title"
               value={newProject.title}
               onChange={(e) => setNewProject({...newProject, title: e.target.value})}
               className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-purple-400"
             />
             <textarea
-              placeholder="Descripción del proyecto"
+              placeholder="Project description"
               value={newProject.description}
               onChange={(e) => setNewProject({...newProject, description: e.target.value})}
               className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-purple-400"
@@ -86,7 +86,7 @@ export const ProjectIdeas = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
-                placeholder="Tech stack (separado por comas)"
+                placeholder="Tech stack (comma separated)"
                 value={newProject.technology_stack}
                 onChange={(e) => setNewProject({...newProject, technology_stack: e.target.value})}
                 className="bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-purple-400"
@@ -96,9 +96,9 @@ export const ProjectIdeas = () => {
                 onChange={(e) => setNewProject({...newProject, priority: e.target.value as any})}
                 className="bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-purple-400"
               >
-                <option value="low">Prioridad Baja</option>
-                <option value="medium">Prioridad Media</option>
-                <option value="high">Prioridad Alta</option>
+                <option value="low">Low Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="high">High Priority</option>
               </select>
             </div>
             <div className="flex space-x-3">
@@ -106,13 +106,13 @@ export const ProjectIdeas = () => {
                 onClick={handleAddProject}
                 className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors"
               >
-                Guardar
+                Save
               </button>
               <button
                 onClick={() => setShowAddForm(false)}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded transition-colors"
               >
-                Cancelar
+                Cancel
               </button>
             </div>
           </div>
@@ -154,9 +154,9 @@ export const ProjectIdeas = () => {
                 className={`px-2 py-1 rounded text-xs border-none ${getStatusColor(project.status)}`}
               >
                 <option value="idea">💡 Idea</option>
-                <option value="planning">📋 Planificando</option>
-                <option value="in_progress">🚀 En Progreso</option>
-                <option value="completed">✅ Completado</option>
+                <option value="planning">📋 Planning</option>
+                <option value="in_progress">🚀 In Progress</option>
+                <option value="completed">✅ Completed</option>
               </select>
               
               <button className="text-gray-400 hover:text-white transition-colors">

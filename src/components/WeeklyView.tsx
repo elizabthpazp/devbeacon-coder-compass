@@ -11,17 +11,17 @@ export const WeeklyView = () => {
   const { getPomodoroCount, loading: pomodorosLoading } = usePomodoros();
   
   const [showAddTask, setShowAddTask] = useState(false);
-  const [newTask, setNewTask] = useState({ text: '', day: 'Lunes' });
+  const [newTask, setNewTask] = useState({ text: '', day: 'Monday' });
 
   const handleAddTask = async () => {
     if (newTask.text.trim()) {
       await addTask(newTask.text, newTask.day);
-      setNewTask({ text: '', day: 'Lunes' });
+      setNewTask({ text: '', day: 'Monday' });
       setShowAddTask(false);
     }
   };
 
-  const weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   if (!profile) {
     return (
@@ -37,12 +37,12 @@ export const WeeklyView = () => {
       <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center">
           <Target className="mr-2 h-6 w-6 text-blue-400" />
-          Vista Semanal
+          Weekly View
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Objetivo Semanal</label>
+            <label className="block text-sm text-gray-400 mb-2">Weekly Goal</label>
             <input
               type="text"
               value={profile.weekly_goal || ''}
@@ -51,7 +51,7 @@ export const WeeklyView = () => {
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Stack/Tecnología</label>
+            <label className="block text-sm text-gray-400 mb-2">Current Stack/Technology</label>
             <input
               type="text"
               value={profile.current_stack || ''}
@@ -65,7 +65,7 @@ export const WeeklyView = () => {
         <div className="mt-4">
           <label className="block text-sm text-gray-400 mb-2 flex items-center">
             <Zap className="mr-2 h-4 w-4" />
-            Nivel de Energía: {profile.energy_level}%
+            Energy Level: {profile.energy_level}%
           </label>
           <div className="w-full bg-gray-700 rounded-full h-2">
             <div 
@@ -91,14 +91,14 @@ export const WeeklyView = () => {
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold text-white flex items-center">
               <CheckSquare className="mr-2 h-5 w-5 text-green-400" />
-              Tareas de la Semana
+              Weekly Tasks
             </h3>
             <button
               onClick={() => setShowAddTask(true)}
               className="flex items-center space-x-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors"
             >
               <Plus className="h-4 w-4" />
-              <span>Agregar</span>
+              <span>Add</span>
             </button>
           </div>
 
@@ -107,7 +107,7 @@ export const WeeklyView = () => {
             <div className="mb-4 p-3 bg-gray-700 rounded border border-gray-600">
               <input
                 type="text"
-                placeholder="Nueva tarea..."
+                placeholder="New task..."
                 value={newTask.text}
                 onChange={(e) => setNewTask({...newTask, text: e.target.value})}
                 className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-green-400 mb-3"
@@ -128,13 +128,13 @@ export const WeeklyView = () => {
                     onClick={handleAddTask}
                     className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition-colors"
                   >
-                    Guardar
+                    Save
                   </button>
                   <button
                     onClick={() => setShowAddTask(false)}
                     className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-sm transition-colors"
                   >
-                    Cancelar
+                    Cancel
                   </button>
                 </div>
               </div>
@@ -165,10 +165,10 @@ export const WeeklyView = () => {
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
             <Clock className="mr-2 h-5 w-5 text-red-400" />
-            Pomodoros Completados
+            Completed Pomodoros
           </h3>
           <p className="text-sm text-gray-400 mb-4">
-            Los pomodoros se incrementan automáticamente al completar tareas
+            Pomodoros automatically increment when tasks are completed
           </p>
           {pomodorosLoading ? (
             <div className="flex items-center justify-center py-8">

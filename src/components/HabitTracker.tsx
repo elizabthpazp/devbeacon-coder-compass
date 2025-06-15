@@ -8,7 +8,7 @@ export const HabitTracker = () => {
   const { habits, habitData, loading, addHabit, updateHabitValue } = useHabits();
   const [selectedHabit, setSelectedHabit] = useState<string | null>(null);
 
-  const weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   if (loading) {
     return (
@@ -58,7 +58,7 @@ export const HabitTracker = () => {
           Habit Tracker
         </h2>
         <div className="text-sm text-gray-400">
-          Semana del 11-17 Junio 2024
+          Week of June 11-17, 2024
         </div>
       </div>
 
@@ -68,10 +68,10 @@ export const HabitTracker = () => {
         <div className="text-center py-12">
           <div className="text-6xl mb-4">🎯</div>
           <h3 className="text-xl font-semibold text-white mb-2">
-            ¡Comienza a rastrear tus hábitos!
+            Start tracking your habits!
           </h3>
           <p className="text-gray-400 mb-6">
-            Crea tu primer hábito para comenzar a mejorar tu productividad diaria.
+            Create your first habit to start improving your daily productivity.
           </p>
         </div>
       ) : (
@@ -93,7 +93,7 @@ export const HabitTracker = () => {
                   <div className="text-right">
                     <div className="text-sm text-gray-400">Streak</div>
                     <div className="text-lg font-bold text-orange-400">
-                      {getStreakCount(habit.id)} días
+                      {getStreakCount(habit.id)} days
                     </div>
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export const HabitTracker = () => {
                   ></div>
                 </div>
                 <div className="text-xs text-gray-400">
-                  {getProgress(habit.id).toFixed(0)}% completado esta semana
+                  {getProgress(habit.id).toFixed(0)}% completed this week
                 </div>
               </div>
             ))}
@@ -121,7 +121,7 @@ export const HabitTracker = () => {
                     {selectedHabitData.name}
                   </h3>
                   <p className="text-gray-400">
-                    Meta diaria: {selectedHabitData.target} {selectedHabitData.unit}
+                    Daily target: {selectedHabitData.target} {selectedHabitData.unit}
                   </p>
                 </div>
               </div>
@@ -163,19 +163,19 @@ export const HabitTracker = () => {
                   <div className="text-2xl font-bold text-blue-400">
                     {weekDays.reduce((sum, day) => sum + getHabitValue(selectedHabitData.id, day), 0)}
                   </div>
-                  <div className="text-sm text-gray-400">Total Semanal</div>
+                  <div className="text-sm text-gray-400">Weekly Total</div>
                 </div>
                 <div className="text-center p-3 bg-gray-700 rounded">
                   <div className="text-2xl font-bold text-green-400">
                     {weekDays.filter(day => getHabitValue(selectedHabitData.id, day) >= selectedHabitData.target).length}
                   </div>
-                  <div className="text-sm text-gray-400">Días Completados</div>
+                  <div className="text-sm text-gray-400">Days Completed</div>
                 </div>
                 <div className="text-center p-3 bg-gray-700 rounded">
                   <div className="text-2xl font-bold text-purple-400">
                     {getProgress(selectedHabitData.id).toFixed(0)}%
                   </div>
-                  <div className="text-sm text-gray-400">Progreso</div>
+                  <div className="text-sm text-gray-400">Progress</div>
                 </div>
               </div>
             </div>

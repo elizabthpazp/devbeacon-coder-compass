@@ -14,10 +14,10 @@ export const AddHabitForm = ({ onAddHabit }: AddHabitFormProps) => {
   const [name, setName] = useState('');
   const [icon, setIcon] = useState('💪');
   const [target, setTarget] = useState(1);
-  const [unit, setUnit] = useState('veces');
+  const [unit, setUnit] = useState('times');
 
   const habitIcons = ['💪', '📚', '🏃‍♂️', '💧', '🧘‍♂️', '☕', '🎯', '⚡', '🌱', '🔥'];
-  const commonUnits = ['veces', 'minutos', 'horas', 'páginas', 'vasos', 'km'];
+  const commonUnits = ['times', 'minutes', 'hours', 'pages', 'glasses', 'km'];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ export const AddHabitForm = ({ onAddHabit }: AddHabitFormProps) => {
       setName('');
       setIcon('💪');
       setTarget(1);
-      setUnit('veces');
+      setUnit('times');
       setIsOpen(false);
     } catch (error) {
       console.error('Error adding habit:', error);
@@ -42,7 +42,7 @@ export const AddHabitForm = ({ onAddHabit }: AddHabitFormProps) => {
         className="mb-6 bg-purple-600 hover:bg-purple-700"
       >
         <Plus className="mr-2 h-4 w-4" />
-        Agregar Hábito
+        Add Habit
       </Button>
     );
   }
@@ -53,7 +53,7 @@ export const AddHabitForm = ({ onAddHabit }: AddHabitFormProps) => {
         <div className="flex items-center space-x-4">
           <div className="flex-1">
             <Input
-              placeholder="Nombre del hábito"
+              placeholder="Habit name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="bg-gray-700 border-gray-600 text-white"
@@ -77,7 +77,7 @@ export const AddHabitForm = ({ onAddHabit }: AddHabitFormProps) => {
 
         <div className="flex items-center space-x-4">
           <div className="flex-1">
-            <label className="block text-sm text-gray-400 mb-1">Meta diaria</label>
+            <label className="block text-sm text-gray-400 mb-1">Daily target</label>
             <Input
               type="number"
               min="1"
@@ -87,7 +87,7 @@ export const AddHabitForm = ({ onAddHabit }: AddHabitFormProps) => {
             />
           </div>
           <div className="flex-1">
-            <label className="block text-sm text-gray-400 mb-1">Unidad</label>
+            <label className="block text-sm text-gray-400 mb-1">Unit</label>
             <Select value={unit} onValueChange={setUnit}>
               <SelectTrigger className="bg-gray-700 border-gray-600">
                 <SelectValue />
@@ -105,7 +105,7 @@ export const AddHabitForm = ({ onAddHabit }: AddHabitFormProps) => {
 
         <div className="flex space-x-2">
           <Button type="submit" className="bg-green-600 hover:bg-green-700">
-            Crear Hábito
+            Create Habit
           </Button>
           <Button
             type="button"
@@ -113,7 +113,7 @@ export const AddHabitForm = ({ onAddHabit }: AddHabitFormProps) => {
             onClick={() => setIsOpen(false)}
             className="border-gray-600 text-gray-300 hover:bg-gray-700"
           >
-            Cancelar
+            Cancel
           </Button>
         </div>
       </form>

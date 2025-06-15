@@ -11,7 +11,7 @@ export const Navigation = ({ activeSection, setActiveSection }: NavigationProps)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'weekly', label: 'Vista Semanal', icon: Calendar },
+    { id: 'weekly', label: 'Weekly View', icon: Calendar },
     { id: 'habits', label: 'Habit Tracker', icon: BarChart3 },
     { id: 'snippets', label: 'Code Snippets', icon: Code },
     { id: 'projects', label: 'Side Projects', icon: Lightbulb },
@@ -48,7 +48,7 @@ export const Navigation = ({ activeSection, setActiveSection }: NavigationProps)
       `}>
         <div className="p-4 mt-16 md:mt-0">
           <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
-            Módulos
+            Modules
           </h2>
           <ul className="space-y-2">
             {navItems.map((item) => {

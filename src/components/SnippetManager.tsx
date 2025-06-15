@@ -39,19 +39,19 @@ export const SnippetManager = () => {
           className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors"
         >
           <Plus className="h-4 w-4" />
-          <span>Nuevo Snippet</span>
+          <span>New Snippet</span>
         </button>
       </div>
 
       {/* Add Snippet Form */}
       {showAddForm && (
         <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-          <h3 className="text-lg font-semibold text-white mb-4">Agregar Nuevo Snippet</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">Add New Snippet</h3>
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
-                placeholder="Título del snippet"
+                placeholder="Snippet title"
                 value={newSnippet.title}
                 onChange={(e) => setNewSnippet({...newSnippet, title: e.target.value})}
                 className="bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-400"
@@ -70,14 +70,14 @@ export const SnippetManager = () => {
               </select>
             </div>
             <textarea
-              placeholder="Descripción"
+              placeholder="Description"
               value={newSnippet.description}
               onChange={(e) => setNewSnippet({...newSnippet, description: e.target.value})}
               className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-400"
               rows={2}
             />
             <textarea
-              placeholder="Código"
+              placeholder="Code"
               value={newSnippet.code}
               onChange={(e) => setNewSnippet({...newSnippet, code: e.target.value})}
               className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-400 font-mono text-sm"
@@ -88,13 +88,13 @@ export const SnippetManager = () => {
                 onClick={handleAddSnippet}
                 className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors"
               >
-                Guardar
+                Save
               </button>
               <button
                 onClick={() => setShowAddForm(false)}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded transition-colors"
               >
-                Cancelar
+                Cancel
               </button>
             </div>
           </div>

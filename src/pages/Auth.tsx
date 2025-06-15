@@ -27,7 +27,7 @@ const Auth = () => {
     } else if (isLogin) {
       navigate('/');
     } else {
-      setError('Revisa tu email para confirmar tu cuenta');
+      setError('Check your email to confirm your account');
     }
 
     setLoading(false);
@@ -42,10 +42,10 @@ const Auth = () => {
             <h1 className="text-3xl font-bold text-white">DevBeacon</h1>
           </div>
           <h2 className="text-xl text-gray-300">
-            {isLogin ? 'Inicia sesión' : 'Crea tu cuenta'}
+            {isLogin ? 'Sign In' : 'Create Account'}
           </h2>
           <p className="text-gray-400 mt-2">
-            {isLogin ? 'Bienvenido de vuelta' : 'Únete a la comunidad de developers productivos'}
+            {isLogin ? 'Welcome back' : 'Join the productive developer community'}
           </p>
         </div>
 
@@ -72,14 +72,14 @@ const Auth = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-600 placeholder-gray-400 text-white bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="tu@email.com"
+                  placeholder="your@email.com"
                 />
               </div>
             </div>
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-                Contraseña
+                Password
               </label>
               <div className="mt-1 relative">
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -106,12 +106,12 @@ const Auth = () => {
               {loading ? (
                 <div className="flex items-center space-x-2">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                  <span>Procesando...</span>
+                  <span>Processing...</span>
                 </div>
               ) : (
                 <div className="flex items-center space-x-2">
                   <User className="h-4 w-4" />
-                  <span>{isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}</span>
+                  <span>{isLogin ? 'Sign In' : 'Create Account'}</span>
                 </div>
               )}
             </button>
@@ -127,8 +127,8 @@ const Auth = () => {
               className="text-blue-400 hover:text-blue-300 text-sm transition-colors"
             >
               {isLogin 
-                ? '¿No tienes cuenta? Regístrate aquí' 
-                : '¿Ya tienes cuenta? Inicia sesión'
+                ? "Don't have an account? Sign up here" 
+                : 'Already have an account? Sign in'
               }
             </button>
           </div>

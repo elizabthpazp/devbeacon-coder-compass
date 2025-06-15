@@ -63,7 +63,7 @@ const Index = () => {
               <h1 className="text-xl md:text-2xl font-bold text-white">DevBeacon</h1>
             </div>
             <div className="hidden sm:block text-xs md:text-sm text-gray-400">
-              v1.0.0 | El Planner Definitivo para Developers Productivos
+              v1.0.0 | The Ultimate Planner for Productive Developers
             </div>
           </div>
           
@@ -76,7 +76,7 @@ const Index = () => {
               className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
             >
               <LogOut className="h-4 w-4" />
-              <span className="hidden sm:inline">Salir</span>
+              <span className="hidden sm:inline">Sign Out</span>
             </button>
           </div>
         </div>
@@ -99,7 +99,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-gray-700 bg-gray-800 px-4 md:px-6 py-4 text-center text-xs md:text-sm text-gray-400">
-        <p>DevBeacon © 2024 | Diseñado por y para developers 💜</p>
+        <p>DevBeacon © 2024 | Designed by and for developers 💜</p>
       </footer>
     </div>
   );
